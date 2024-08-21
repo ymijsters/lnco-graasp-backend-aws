@@ -21,7 +21,7 @@ const start = async () => {
     // allows to remove logging of incomming requests
     // can not be set using an environnement variable
     disableRequestLogging: false,
-    logger: {
+/*    logger: {
       // Do not use pino-pretty in production
       transport: PROD
         ? undefined
@@ -29,7 +29,7 @@ const start = async () => {
             target: 'pino-pretty',
           },
       level: process.env.LOG_LEVEL,
-    },
+    },*/
     ajv: {
       customOptions: {
         // This allow routes that take array to correctly interpret single values as an array
