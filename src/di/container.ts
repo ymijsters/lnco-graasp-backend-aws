@@ -54,17 +54,28 @@ import { registerValue, resolveDependency } from './utils';
 export const registerDependencies = (instance: FastifyInstance) => {
   const { log, db } = instance;
 
+  console.log("In Register Dependencies");
+
   // register FastifyBasLogger as a value to allow BaseLogger to be injected automatically.
   registerValue(FASTIFY_LOGGER_DI_KEY, log);
+
+  console.log("BaseLogger Dependency Succeeded");
 
   // register file type for the StorageService.
   registerValue(FILE_ITEM_TYPE_DI_KEY, FILE_ITEM_TYPE);
 
+  console.log("StorageService Dependency Succeeded");
+
   // register classifier key for the ValidationService.
   registerValue(IMAGE_CLASSIFIER_API_DI_KEY, IMAGE_CLASSIFIER_API);
 
+  console.log("Validation Service Classifier Key Dependency Succeeded");
+
   // register geolocation key for the ItemGeolocationService.
   registerValue(GEOLOCATION_API_KEY_DI_KEY, GEOLOCATION_API_KEY);
+
+  console.log("Geolocation Dependency Succeeded");
+
 
   registerValue(
     Redis,
@@ -75,6 +86,8 @@ export const registerDependencies = (instance: FastifyInstance) => {
       password: REDIS_PASSWORD,
     }),
   );
+
+  console.log("Redis Registered");
 
   registerValue(
     MailerService,
@@ -88,6 +101,9 @@ export const registerDependencies = (instance: FastifyInstance) => {
     }),
   );
 
+  console.log("Mail Service Registered");
+
+
   // register the interface FileRepository with the concrete repo returned by the factory.
   registerValue(
     FILE_REPOSITORY_DI_KEY,
@@ -97,6 +113,9 @@ export const registerDependencies = (instance: FastifyInstance) => {
     }),
   );
 
+  console.log("S3 Service Registered");
+
+
   // register MeiliSearch and its wrapper.
   registerValue(
     MeiliSearch,
@@ -105,6 +124,9 @@ export const registerDependencies = (instance: FastifyInstance) => {
       apiKey: MEILISEARCH_MASTER_KEY,
     }),
   );
+
+  console.log("Meilisearch Service Registered");
+
   // Will be registered automatically when db will be injectable.
   registerValue(
     MeiliSearchWrapper,
@@ -115,6 +137,9 @@ export const registerDependencies = (instance: FastifyInstance) => {
       resolveDependency(BaseLogger),
     ),
   );
+
+  console.log("Meilisearch Wrapper Service Registered");
+
 
   registerValue(
     ImportExportService,
@@ -127,6 +152,9 @@ export const registerDependencies = (instance: FastifyInstance) => {
     ),
   );
 
+  console.log("ImportExport Service Registered");
+
+
   // Launch Job workers
   const jobServiceBuilder = new JobServiceBuilder(resolveDependency(BaseLogger));
   jobServiceBuilder
@@ -136,8 +164,14 @@ export const registerDependencies = (instance: FastifyInstance) => {
     })
     .build();
 
+    console.log("JobServices Launched");
+
+
   // Register EtherPad
   const etherPadConfig = resolveDependency(EtherpadServiceConfig);
+
+  console.log("Etherpad Dependency Resolved");
+
 
   // connect to etherpad server
   registerValue(
@@ -151,7 +185,13 @@ export const registerDependencies = (instance: FastifyInstance) => {
     ),
   );
 
+  console.log("Etherpad Service REgistered");
+
+
   registerValue(ETHERPAD_NAME_FACTORY_DI_KEY, new RandomPadNameFactory());
+
+  console.log("Etherpad Value REgistered");
+
 
   // This code will be improved when we will be able to inject the repositories.
   const { itemTagRepository, itemValidationGroupRepository, itemPublishedRepository } =
@@ -166,4 +206,7 @@ export const registerDependencies = (instance: FastifyInstance) => {
       resolveDependency(ValidationQueue),
     ),
   );
+
+  console.log("Last STep Completed");
+
 };
