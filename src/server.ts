@@ -11,7 +11,6 @@ import {
   ENVIRONMENT,
   HOSTNAME,
   PORT,
-  PROD,
 } from './utils/config';
 // import fastifyCompress from 'fastify-compress';
 import { GREETING } from './utils/constants';
