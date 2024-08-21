@@ -17,7 +17,6 @@ import {
 import { GREETING } from './utils/constants';
 
 const start = async () => {
-  console.log("Create Fastify");
   const instance = fastify({
     // allows to remove logging of incomming requests
     // can not be set using an environnement variable
@@ -41,12 +40,14 @@ const start = async () => {
     },
   });
 
-  console.log("Done creating Fastify");
-
   const { Sentry } = initSentry(instance);
+
+  console.log("Passed the Sentry step");
 
   instance.register(fastifyHelmet);
   // fastifyApp.register(fastifyCompress);
+  console.log("Passed the fastifyHelmet step");
+
 
   if (CORS_ORIGIN_REGEX) {
     instance.decorate('corsPluginOptions', {
@@ -56,7 +57,12 @@ const start = async () => {
     });
   }
 
+  console.log("Passed the Cors_Origin_Regex step");
+
   await registerAppPlugins(instance);
+
+  console.log("Passed the registerAppPlugins step");
+
 
   // const mainMetric = SentryConfig.enable
   //   ? Sentry.startTransaction({
@@ -66,6 +72,7 @@ const start = async () => {
   //   : null;
 
   try {
+    console.log("Made it into the final try blog");
     await instance.listen({ port: PORT, host: HOSTNAME });
     instance.log.info('App is running version %s in %s mode', APP_VERSION, ENVIRONMENT);
     if (DEV) {
