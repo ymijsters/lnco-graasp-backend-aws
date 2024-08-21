@@ -117,6 +117,8 @@ jobs:
             H5P_CONTENT_BUCKET=${{ vars.H5P_CONTENT_BUCKET }}
             H5P_CONTENT_REGION=${{ vars.H5P_CONTENT_REGION }}
             H5P_CONTENT_SECRET_ACCESS_KEY_ID=${{ secrets.H5P_CONTENT_SECRET_ACCESS_KEY }}
+            H5P_STORAGE_ROOT_PATH=${{ vars.H5P_STORAGE_ROOT_PATH }}
+            H5P_FILE_STORAGE_HOST=${{ vars.H5P_FILE_STORAGE_HOST }}
             H5P_FILE_STORAGE_TYPE=${{ vars.H5P_FILE_STORAGE_TYPE }}
             H5P_PATH_PREFIX=${{ vars.H5P_PATH_PREFIX }}
             HOSTNAME=${{ vars.HOSTNAME }}
