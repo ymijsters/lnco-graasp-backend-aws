@@ -17,10 +17,11 @@ import {
 import { GREETING } from './utils/constants';
 
 const start = async () => {
+  console.log("Create Fastify");
   const instance = fastify({
     // allows to remove logging of incomming requests
     // can not be set using an environnement variable
-    disableRequestLogging: false,
+    disableRequestLogging: true,
 /*    logger: {
       // Do not use pino-pretty in production
       transport: PROD
@@ -39,6 +40,8 @@ const start = async () => {
       plugins: [ajvFormats],
     },
   });
+
+  console.log("Done creating Fastify");
 
   const { Sentry } = initSentry(instance);
 
