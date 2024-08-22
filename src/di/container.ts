@@ -115,7 +115,7 @@ export const registerDependencies = (instance: FastifyInstance) => {
 
   console.log("S3 Service Registered");
 
-/*
+
   // register MeiliSearch and its wrapper.
   registerValue(
     MeiliSearch,
@@ -139,7 +139,7 @@ export const registerDependencies = (instance: FastifyInstance) => {
   );
 
   console.log("Meilisearch Wrapper Service Registered");
-*/
+
 
   registerValue(
     ImportExportService,
