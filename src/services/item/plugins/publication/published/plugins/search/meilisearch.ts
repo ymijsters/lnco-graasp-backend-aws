@@ -81,6 +81,10 @@ export class MeiliSearchWrapper {
     this.db = db;
     this.logger = logger;
 
+    console.log("SOme Meilisearch Logging for the wrapper");
+    console.log(this.meilisearchClient);
+    console.log(this.indexDictionary);
+
     // create index in the background if it doesn't exist
     this.getIndex();
   }
