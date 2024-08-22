@@ -73,6 +73,7 @@ const start = async () => {
   try {
     console.log("Made it into the final try blog");
     await instance.listen({ port: PORT, host: HOSTNAME });
+    console.log("Listening");
     instance.log.info('App is running version %s in %s mode', APP_VERSION, ENVIRONMENT);
     if (DEV) {
       // greet the world
