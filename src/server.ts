@@ -81,6 +81,8 @@ const start = async () => {
       console.log(`${GREETING}`);
     }
   } catch (err) {
+    console.log("Error");
+    console.log(err);
     instance.log.error(err);
     Sentry?.withScope((_scope) => {
       // scope.setSpan(mainMetric);
