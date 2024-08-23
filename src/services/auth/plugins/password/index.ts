@@ -23,9 +23,11 @@ import {
   patchResetPasswordRequest,
   postResetPasswordRequest,
   setPassword,
+  setPasswordNoUser,
   updatePassword,
 } from './schemas';
 import { MemberPasswordService } from './service';
+import { MemberService } from '../../../member/service';
 
 const REDIRECTION_URL_PARAM = 'url';
 const AUTHENTICATION_FALLBACK_ROUTE = '/auth';
@@ -33,6 +35,7 @@ const AUTHENTICATION_FALLBACK_ROUTE = '/auth';
 const plugin: FastifyPluginAsync = async (fastify) => {
   const { db } = fastify;
   const actionService = resolveDependency(ActionService);
+  const memberService = resolveDependency(MemberService);
   const memberPasswordService = resolveDependency(MemberPasswordService);
 
   // login with password
@@ -86,6 +89,34 @@ const plugin: FastifyPluginAsync = async (fastify) => {
       });
     },
   );
+
+    /**
+   * Set a password for the authenticated member.
+   * If a password alread exists it will return a 409 (Conflict) error.
+   * @param password - The new password.
+   * @returns 204 No Content if the request was successful.
+   */
+  fastify.post<{ Body: { email: string, password: string } }>(
+    '/password/nouser',
+    { schema: setPasswordNoUser },
+    async ({ body: { email, password } }, reply) => {
+      return db.transaction(async (manager) => {
+        const member = await memberService.getByEmail(
+          buildRepositories(manager), email
+        );
+        if(member){
+          await memberService.validate(member.id, buildRepositories(manager));
+          await memberPasswordService.post(member, buildRepositories(manager), password);
+        }
+        else{
+          console.log(member);
+          reply.status(StatusCodes.NOT_FOUND);
+        }
+        reply.status(StatusCodes.NO_CONTENT);
+      });
+    },
+  );
+
 
   /**
    * Update the password of the authenticated member.

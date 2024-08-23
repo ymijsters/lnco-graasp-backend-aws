@@ -54,6 +54,32 @@ export const setPassword: FastifySchema = {
   },
 };
 
+export const setPasswordNoUser: FastifySchema = {
+  tags: ['password'],
+  summary: 'Set a password for a new user',
+  description:
+    'Set a password for a new user. This is only possible if the member does not have a password set already.',
+  body: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      email: { 
+        type: 'string', 
+        format: 'email' 
+      },
+      password: {
+        type: 'string',
+        format: 'strongPassword',
+      },
+    },
+  },
+  response: {
+    [StatusCodes.NO_CONTENT]: { type: 'null' },
+    // returns conflict when there is already a password set
+    [StatusCodes.CONFLICT]: error,
+  },
+};
+
 export const updatePassword: FastifySchema = {
   tags: ['password'],
   summary: 'Update the password of the authenticated member',
