@@ -35,8 +35,6 @@ export default async function (instance: FastifyInstance): Promise<void> {
     logs: DATABASE_LOGS,
   });
 
-  console.log("DB Created");
-
   // register some dependencies manually
   registerDependencies(instance);
 

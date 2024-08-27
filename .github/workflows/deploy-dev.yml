@@ -139,6 +139,7 @@ jobs:
             NODE_ENV=${{ vars.NODE_ENV }}
             PLAYER_CLIENT_HOST=${{ vars.PLAYER_CLIENT_HOST }}
             PORT=${{ vars.PORT }}
+            PROTOCOL=${{ vars.PROTOCOL }}
             PUBLIC_URL=${{ secrets.PUBLIC_URL }}
             RECAPTCHA_SECRET_ACCESS_KEY=${{ secrets.RECAPTCHA_SECRET_ACCESS_KEY }}
             REDIS_HOST=${{ secrets.REDIS_HOST }}

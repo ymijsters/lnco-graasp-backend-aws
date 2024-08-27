@@ -58,6 +58,11 @@ export const APP_VERSION = process.env.APP_VERSION;
 
 const DEFAULT_HOST = 'http://localhost:3000';
 
+export const AUTH_HOST = {
+  name: Context.Builder,
+  url: new URL(process.env.AUTH_CLIENT_HOST ?? DEFAULT_HOST),
+};
+
 export const BUILDER_HOST = {
   name: Context.Builder,
   url: new URL(process.env.BUILDER_CLIENT_HOST ?? DEFAULT_HOST),
@@ -144,6 +149,7 @@ export const AUTH_CLIENT_HOST = new URL(
  * }
  * >
  */
+
 export const PUBLIC_URL = new URL(process.env.PUBLIC_URL ?? HOST);
 
 export const MOBILE_AUTH_URL = new URL(process.env.MOBILE_AUTH_URL || 'https://mobile.graasp.org');

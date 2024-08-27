@@ -101,8 +101,6 @@ export const registerDependencies = (instance: FastifyInstance) => {
     }),
   );
 
-  console.log("Mail Service Registered");
-
 
   // register the interface FileRepository with the concrete repo returned by the factory.
   registerValue(
@@ -112,8 +110,6 @@ export const registerDependencies = (instance: FastifyInstance) => {
       local: FILE_ITEM_PLUGIN_OPTIONS,
     }),
   );
-
-  console.log("S3 Service Registered");
 
 
   // register MeiliSearch and its wrapper.
@@ -125,8 +121,6 @@ export const registerDependencies = (instance: FastifyInstance) => {
     }),
   );
 
-  console.log("Meilisearch Service Registered");
-
   // Will be registered automatically when db will be injectable.
   registerValue(
     MeiliSearchWrapper,
@@ -137,9 +131,6 @@ export const registerDependencies = (instance: FastifyInstance) => {
       resolveDependency(BaseLogger),
     ),
   );
-
-  console.log("Meilisearch Wrapper Service Registered");
-
 
   registerValue(
     ImportExportService,
